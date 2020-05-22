@@ -26,5 +26,6 @@ RUN pip install yq
 # add aws-iam-authenticator
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator
 RUN chmod +x ./aws-iam-authenticator
+RUN cp ./aws-iam-authenticator usr/bin/aws-iam-authenticator
 RUN mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
 RUN echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
