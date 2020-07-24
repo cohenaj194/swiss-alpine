@@ -19,6 +19,7 @@ RUN apk -v --update add \
       libffi-dev \
       bash \
       ansible \
+      sshpass \
       openssh-client \
       terraform \
       && \
