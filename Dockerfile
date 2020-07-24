@@ -41,3 +41,8 @@ RUN chmod +x ./aws-iam-authenticator
 RUN cp ./aws-iam-authenticator usr/bin/aws-iam-authenticator
 RUN mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin
 RUN echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+
+# upgrade terraform to 0.12.21
+RUN wget https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip
+RUN unzip terraform_0.12.21_linux_amd64.zip && rm terraform_0.12.21_linux_amd64.zip
+RUN mv terraform /usr/bin/terraform
