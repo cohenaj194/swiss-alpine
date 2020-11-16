@@ -22,6 +22,8 @@ RUN apk -v --update add \
       sshpass \
       openssh-client \
       terraform \
+      docker \
+      openrc \
       && \
       pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic && \
       apk -v --purge del && \
@@ -46,3 +48,6 @@ RUN echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 RUN wget https://releases.hashicorp.com/terraform/0.12.21/terraform_0.12.21_linux_amd64.zip
 RUN unzip terraform_0.12.21_linux_amd64.zip && rm terraform_0.12.21_linux_amd64.zip
 RUN mv terraform /usr/bin/terraform
+
+# add docker
+RUN rc-update add docker boot
