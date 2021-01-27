@@ -25,7 +25,7 @@ RUN apk -v --update add \
       docker \
       openrc \
       && \
-      pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic && \
+      pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic anybadge && \
       apk -v --purge del && \
       rm /var/cache/apk/*
       
