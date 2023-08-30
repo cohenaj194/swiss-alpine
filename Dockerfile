@@ -1,5 +1,6 @@
 FROM alpine:3.7
 COPY --from=golang:1.14-alpine /usr/local/go/ /usr/local/go/
+COPY --from=mcr.microsoft.com/azure-cli /usr/local/bin/az /usr/local/bin/az
 
 ENV PATH="/usr/local/go/bin:${PATH}"
 
@@ -33,9 +34,11 @@ RUN apk -v --update add \
       apk -v --purge del && \
       rm /var/cache/apk/*
 
-# add glab to generate gitlab tickets
-RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-RUN apk add --no-cache glab@edge
+#### broken
+## add glab to generate gitlab tickets
+# RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+# RUN apk add --no-cache glab@edge
+#### broken
 
 # add kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.1/bin/linux/amd64/kubectl
@@ -59,7 +62,7 @@ RUN curl -L -o - https://github.com/vmware/govmomi/releases/download/v0.25.0/gov
 
 # install the godog cumcumber.io tool
 # alias godog="/root/go/bin/godog"
-RUN mkdir godogs && cd godogs && go mod init godogs && go get github.com/cucumber/godog/cmd/godog
+# RUN mkdir godogs && cd godogs && go mod init godogs && go get github.com/cucumber/godog/cmd/godog
 
 # install github-cli tool gh for github pipelines
 RUN wget https://github.com/cli/cli/releases/download/v2.6.0/gh_2.6.0_linux_386.tar.gz -O ghcli.tar.gz
