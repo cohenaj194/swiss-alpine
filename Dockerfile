@@ -1,8 +1,9 @@
 ## old alpine image
-# FROM alpine:3.7
+FROM alpine:3.7
 
-# new azure image is alpine too
-FROM mcr.microsoft.com/azure-cli
+## new azure image is alpine too
+#FROM mcr.microsoft.com/azure-cli
+
 COPY --from=golang:1.14-alpine /usr/local/go/ /usr/local/go/
 
 ENV PATH="/usr/local/go/bin:${PATH}"
@@ -30,6 +31,8 @@ RUN apk -v --update add \
       git \
       musl-dev \
       go \
+      python \
+      py-pip \
       && \
       pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic anybadge yq && \
       apk -v --purge del && \
