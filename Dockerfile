@@ -1,6 +1,9 @@
-FROM alpine:3.7
+## old alpine image
+# FROM alpine:3.7
+
+# new azure image is alpine too
+FROM mcr.microsoft.com/azure-cli
 COPY --from=golang:1.14-alpine /usr/local/go/ /usr/local/go/
-COPY --from=mcr.microsoft.com/azure-cli /usr/local/bin/az /usr/local/bin/az
 
 ENV PATH="/usr/local/go/bin:${PATH}"
 
@@ -8,8 +11,6 @@ RUN apk -v --update add \
       util-linux \
       jq \
       curl \
-      python \
-      py-pip \
       groff \
       less \
       mailcap \
@@ -33,6 +34,10 @@ RUN apk -v --update add \
       pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic anybadge yq && \
       apk -v --purge del && \
       rm /var/cache/apk/*
+
+## take these out, the azure cli comes with pip and python
+#     python \
+#     py-pip \
 
 #### broken
 ## add glab to generate gitlab tickets
