@@ -1,8 +1,8 @@
 ## old alpine image
-FROM alpine:3.7
+# FROM alpine:3.7
 
 ## new azure image is alpine too
-#FROM mcr.microsoft.com/azure-cli
+FROM mcr.microsoft.com/azure-cli
 
 COPY --from=golang:1.14-alpine /usr/local/go/ /usr/local/go/
 
@@ -31,10 +31,8 @@ RUN apk -v --update add \
       git \
       musl-dev \
       go \
-      python \
-      py-pip \
       && \
-      pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic anybadge yq && \
+      pip install --upgrade python-magic anybadge yq && \
       apk -v --purge del && \
       rm /var/cache/apk/*
 
@@ -75,3 +73,6 @@ RUN curl -L -o - https://github.com/vmware/govmomi/releases/download/v0.25.0/gov
 # install github-cli tool gh for github pipelines
 RUN wget https://github.com/cli/cli/releases/download/v2.6.0/gh_2.6.0_linux_386.tar.gz -O ghcli.tar.gz
 RUN tar --strip-components=1 -xf ghcli.tar.gz
+
+# aws cli
+RUN apk add --no-cache aws-cli
